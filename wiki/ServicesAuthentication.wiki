@@ -16,7 +16,7 @@ using Lastfm
 using System;
 using Lastfm.Services;
 
-namespace sandbox
+namespace MyApplication
 {
 	class MainClass
 	{
