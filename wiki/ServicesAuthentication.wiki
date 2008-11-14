@@ -32,3 +32,5 @@ namespace MyApplication
 	}
 }
 }}}
+
+The lifetime of a Session Key is infinite, unless the user provokes your rights to access his profile. You should store it somewhere for later use.
