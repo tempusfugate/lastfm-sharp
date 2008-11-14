@@ -11,9 +11,6 @@ A session in Lastfm.Services is represented by an instance of the class Lastfm.S
 
 {{{
 using System;
-using Lastfm
-
-using System;
 using Lastfm.Services;
 
 namespace MyApplication
