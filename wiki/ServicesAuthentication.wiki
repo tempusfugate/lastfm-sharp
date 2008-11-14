@@ -5,48 +5,33 @@
 
 During the course of using the last.fm webservices (the namespace Lastfm.Services), you're going to be needing an API account "Key" and "Secret" values. You can obtain those from [http://www.last.fm/api/account there].
 
-In order to perform _write_ operations to a last.fm user profile, you're going to need this user's permission at the end of which you'll receive a "Session Key" value that you're going to use as well.
+In order to perform _write_ operations to a last.fm user profile, you're going to need a "Session Key" which represents the user's permission to perform operations on his behalf.
 
-The lifetime of a _session key_ is infinite, unless the user provokes your rights to access his profile. You should store it somewhere for later use.
-
-== User authentication example (in C#) ==
+A session in Lastfm.Services is represented by an instance of the class Lastfm.Services.Session which can be constructed as follows:
 
 {{{
 using System;
+using Lastfm
+
+using System;
 using Lastfm.Services;
 
-public static void Main(string[] args)
+namespace sandbox
 {
-	// Do not use those values, replace with your own.
-	string API_KEY = "b25b959554ed76058ac220b7b2e0a026";
-	string API_SECRET = "361505f8eeaf61426ef95a4317482251";
+	class MainClass
+	{
+		public static void Main(string[] args)
+		{
+			string API_KEY =	"b25b959554ed76058ac220b7b2e0a026";
+			string API_SECRET = 	"361505f8eeaf61426ef95a4317482251";
+      
+			// An unauthenticated session will perform read-only operations.
+			Session session = new Session(API_KEY, API_SECRET);
 			
-	Authenticator auth = Authenticator.Create(APIKey, Secret);
-	Console.WriteLine("Please open the following line in your browser and complete the authentication process, then press Enter...");
-	Console.WriteLine(auth.GetAuthenticationURL());
-	Console.ReadLine();
-	
-	string SessionKey = auth.GetSessionKey();
-	Console.WriteLine("Authentication successfull. Thank you.");
+			// In order to perform *write* operations, a session must
+			// be authenticated by the user.
+			session.Authenticate("TheUserName", Lastfm.Utilities.md5("profilepassword"));
+		}
+	}
 }
-}}}
-
-== User authentication example (in VB) ==
-{{{
-Imports System
-Imports Lastfm.Services
-
-Public Shared Sub Main(ByVal args As String())
-    Dim API_KEY As String = "b25b959554ed76058ac220b7b2e0a026"
-    Dim API_SECRET As String = "861595fdeeaf6142def95a0317482251"
-    
-    Dim auth As Authenticator = Authenticator.Create(APIKey, Secret)
-    Console.WriteLine("Please open the following line in your browser and complete the authentication process, then press Enter...")
-    Console.WriteLine(auth.GetAuthenticationURL())
-    Console.ReadLine()
-    
-    Dim SessionKey As String = auth.GetSessionKey()
-    Console.WriteLine("Authentication successfull. Thank you.")
-End Sub
-
 }}}
