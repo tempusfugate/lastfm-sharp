@@ -1,5 +1,4 @@
 #summary The authentication process
-#labels Featured
 
 = Services Authentication =
 
