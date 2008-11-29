@@ -1,0 +1,41 @@
+#summary Example code
+
+= Examples =
+
+Here's a couple of examples of how you could be using lastfm-sharp.
+
+== Authentication ==
+{{{
+using System;
+using Lastfm.Services;
+
+namespace MyApp
+{
+	class MainClass
+	{
+		public static void Main(string[] args)
+		{
+			// Get your own API_KEY and API_SECRET from http://www.last.fm/api/account
+			string API_KEY =	"b25b959554ed76058ac220b7b2e0a026";
+			string API_SECRET = 	"361505f8eeaf61426ef95a4317482251";
+
+			// Creating an unauthenticated session that could only allow me
+			// to perform read operations.
+			Session session = new Session(API_KEY, API_SECRET);
+			
+			Console.WriteLine("Please enter your username: ");
+			string username = Console.ReadLine();
+			Console.WriteLine("Please enter your password: ");
+			string md5password = Lastfm.Utilities.md5(Console.ReadLine());
+			
+			// Authenticate it with a username and password to be able
+			// to perform write operations and access this user's profile
+			// private data.
+			session.Authenticate(username, md5password);
+			
+			// You can now use the "session" object with everything in your project.
+			
+		}
+	}
+}
+}}}
