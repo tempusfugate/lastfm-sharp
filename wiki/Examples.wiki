@@ -65,7 +65,7 @@ namespace MyApp
       string url = session.GetWebAuthenticationURL();
       
       // Ask the user to open it and allow you to access his/her profile.
-      Console.WriteLine("Please open the following url in your web browser and follow the procedure, then press Entery...");
+      Console.WriteLine("Please open the following url in your web browser and follow the procedure, then press Enter...");
       Console.WriteLine(url);
       
       // Wait for it...
