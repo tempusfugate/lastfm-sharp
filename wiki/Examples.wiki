@@ -59,7 +59,7 @@ namespace MyApp
       
       // Creating an unauthenticated session that could only allow me
       // to perform read operations.
-      Session session = new Session(API_KEY, API_SECRET, SESSION_KEY);
+      Session session = new Session(API_KEY, API_SECRET);
       
       // Generate a web authentication url
       string url = session.GetWebAuthenticationURL();
